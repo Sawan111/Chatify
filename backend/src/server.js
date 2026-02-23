@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
+import {connectDB} from "./lib/db.js"
 
 import authRoutes from "./routes/auth.route.js";
 dotenv.config();
@@ -34,4 +35,7 @@ if (process.env.NODE_ENV === "production") {
 
 }
 
-app.listen(PORT,()=>console.log("Server running on the port ok 3000"));
+app.listen(PORT,()=>{
+   console.log("Server running on the port 3000")
+   connectDB()
+});
