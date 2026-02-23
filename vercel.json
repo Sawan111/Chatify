@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://chatify-backend-440y.onrender.com/api/$1"
+    }
+  ]
+}
