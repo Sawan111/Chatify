@@ -23,6 +23,18 @@ console.log(ENV.PORT);
 // req body
 app.use(express.json()); 
 
+
+
+
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://chatifynew-beta.vercel.app",
+    "https://gupshup-ci52.onrender.com"
+  ],
+  credentials: true
+}));
+
 app.use("/api/auth",authRoutes); 
 //make ready for deployment
 if (ENV.NODE_ENV === "production") {
