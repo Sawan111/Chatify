@@ -34,6 +34,9 @@ if (ENV.NODE_ENV === "production") {
   });
 
 }
+app.get("/", (req, res) => {
+  res.send("Chatify Backend Running 🚀");
+});
 
 app.listen(PORT,()=>{
    console.log("Server running on the port 3000")
