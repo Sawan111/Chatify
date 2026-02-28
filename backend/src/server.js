@@ -1,4 +1,5 @@
 import express from "express";
+import cooksParser from "cookie-parser";
 
 import path from "path";
 import cors from "cors";
@@ -22,6 +23,7 @@ console.log(ENV.PORT);
 
 // req body
 app.use(express.json()); 
+app.use(cooksParser());
 
 
 

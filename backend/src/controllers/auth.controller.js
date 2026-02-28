@@ -95,3 +95,39 @@ export const logout = (_, res) => {
   });
   res.status(200).json({ message: "Logged out successfully" });
 };
+
+export const updateProfile = async (req, res) => {
+  const { fullname, profilePic } = req.body;
+  try {
+    
+       if(!profilePic) res.status(400).json({ message: "Profile picture is required" });
+
+       const userId=req.user._id;
+
+      const uploadResponse= await cloudinary.uploader.upload(profilePic)
+      
+      const updatedUser= await User.findByIdAndUpdate(userId,{
+        fullname,
+        profilePic:uploadResponse.secure_url
+      },{new:true})
+
+      if(!updatedUser){
+        return res.status(404).json({ message: "User not found" });
+      }
+
+
+    await updatedUser.save();
+
+    res.status(200).json({
+      _id: updatedUser._id,
+      fullname: updatedUser.fullname,
+      email: updatedUser.email,
+      profilePic: updatedUser.profilePic,
+    });
+
+  } catch (error) {
+    console.log("Error in updateProfile controller:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+  
